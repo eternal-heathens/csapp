@@ -1,0 +1,42 @@
+# Execution begins at address 0 
+	.pos 0
+	irmovq stack, %rsp  	# Set up stack pointer
+	call main		# Execute main program
+	halt			# Terminate program 
+
+# Array of 4 elements
+	.align 8
+ele1:
+    .quad 0x00a
+    .quad ele2
+ele2:
+    .quad 0x0b0
+    .quad ele3
+ele3:
+    .quad 0xc00
+    .quad 0
+
+main:	
+    irmovq ele1,%rdi
+	call rsum_list		# rsum_list(list_ptr ls)
+	ret
+
+# long rsum_list(list_ptr ls)
+# ls in %rdi
+rsum_list:	
+    pushq	%rbp
+    xorq %rax, %rax  
+    andq   %rdi,%rdi     # if null
+    je     finish        # if null -> finish   
+    mrmovq (%rdi),%rbp   # Get *start
+    mrmovq 8(%rdi),%rdi   # Get  *next     
+    call    rsum_list      # Stop when 0
+    addq %rbp, %rax      #当调用rsum_list后，结果保存在%rax中
+finish:
+    popq  %rbp           # 弹出上个迭代的val
+    ret                  # Return
+
+
+# Stack starts here and grows to lower addresses
+	.pos 0x200
+stack:

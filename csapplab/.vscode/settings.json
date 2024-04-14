@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "unistd.h": "c",
+        "signal.h": "c",
+        "sigset_t.h": "c",
+        "tool.h": "c",
+        "string.h": "c",
+        "types.h": "c",
+        "posix_opt.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "compare": "c",
+        "csapp.h": "c",
+        "string": "c"
+    }
+}
